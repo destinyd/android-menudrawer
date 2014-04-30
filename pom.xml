@@ -22,6 +22,7 @@
     <modules>
         <module>menudrawer</module>
         <module>menudrawer-samples</module>
+        <module>menudrawer-samples2</module>
     </modules>
 
     <scm>

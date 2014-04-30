@@ -29,4 +29,14 @@ menudrawer-samples/*
 !menudrawer-samples/pom.xml
 !menudrawer-samples/build.gradle
 
+!menudrawer-samples2/
+menudrawer-samples2/*
+!menudrawer-samples2/src/
+!menudrawer-samples2/res/
+!menudrawer-samples2/libs/
+!menudrawer-samples2/AndroidManifest.xml
+!menudrawer-samples2/pom.xml
+!menudrawer-samples2/build.gradle
+
+
 .DS_store
