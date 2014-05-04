@@ -1562,8 +1562,19 @@ public abstract class MenuDrawer extends ViewGroup {
     @Override
     protected boolean fitSystemWindows(Rect insets) {
         if (mDragMode == MENU_DRAG_WINDOW && mPosition != Position.BOTTOM) {
-            mMenuContainer.setPadding(0, insets.top, 0, 0);
+//            mMenuContainer.setPadding(0, insets.top, 0, 0);
+
+            // fix actionbar title big
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) this
+                    .getLayoutParams();
+            int top = params.topMargin + insets.top;
+            int bottom = params.bottomMargin + insets.bottom;
+            int left = params.leftMargin + insets.left;
+            int right = params.rightMargin + insets.right;
+            params.setMargins(left, top, right, bottom);
+            return true;
         }
+
         return super.fitSystemWindows(insets);
     }
 
