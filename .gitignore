@@ -38,5 +38,13 @@ menudrawer-samples2/*
 !menudrawer-samples2/pom.xml
 !menudrawer-samples2/build.gradle
 
+!android-menudrawer-fragment-samples/
+android-menudrawer-fragment-samples/*
+!android-menudrawer-fragment-samples/src/
+!android-menudrawer-fragment-samples/res/
+!android-menudrawer-fragment-samples/libs/
+!android-menudrawer-fragment-samples/AndroidManifest.xml
+!android-menudrawer-fragment-samples/pom.xml
+!android-menudrawer-fragment-samples/build.gradle
 
 .DS_store
