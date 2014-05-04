@@ -49,30 +49,37 @@ public class ActivityBase extends SherlockActivity implements Button.OnClickList
         switch (v.getId()){
             case R.id.button1:
                 startActivity(new Intent(this, Activity1.class));
-                mMenuDrawer.closeMenu();
+//                mMenuDrawer.closeMenu();
+                overridePendingTransition(R.anim.in_from_bottom, R.anim.out_to_none);
                 break;
 
             case R.id.button2:
                 startActivity(new Intent(this, Activity2.class));
-                mMenuDrawer.closeMenu();
+//                mMenuDrawer.closeMenu();
+                overridePendingTransition(R.anim.in_from_bottom, R.anim.out_to_none1);
                 break;
 
             case R.id.button3:
                 startActivity(new Intent(this, Activity3.class));
-                mMenuDrawer.closeMenu();
+//                mMenuDrawer.closeMenu();
+                overridePendingTransition(R.anim.in_from_bottom, R.anim.out_to_top);
                 break;
 
             case R.id.button4:
                 startActivity(new Intent(this, Activity4.class));
-                mMenuDrawer.closeMenu();
+//                mMenuDrawer.closeMenu();
+                overridePendingTransition(R.anim.in_from_bottom, R.anim.out_to_none1);
                 break;
         }
     }
-    public void set_foreground_opening_offset(int offset_dp){
+    public void set_foreground_opening_offset(int offset_dp)
+    {
         foreground_opening_offset_dp = offset_dp;
+        setMenuSize();
     };
 
     private void setMenuSize() {
+//        set_foreground_opening_offset(50);
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         int displayHeight = metrics.heightPixels;
 

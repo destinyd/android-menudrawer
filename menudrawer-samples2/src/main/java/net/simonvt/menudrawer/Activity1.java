@@ -22,6 +22,7 @@ public class Activity1 extends ActivityBase {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMenuDrawer.setContentView(R.layout.activity1);
+        getSupportActionBar().hide();
     }
 }
 

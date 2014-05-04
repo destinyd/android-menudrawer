@@ -15,6 +15,7 @@ public class Activity3 extends ActivityBase {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMenuDrawer.setContentView(R.layout.activity3);
+        set_foreground_opening_offset(100);
     }
 }
 

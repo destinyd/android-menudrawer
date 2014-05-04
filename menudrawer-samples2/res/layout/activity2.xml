@@ -10,6 +10,6 @@
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Activity2"
+            android:text="hide title, set_foreground_opening_offset 50"
             android:id="@+id/button1" android:layout_centerInParent="true"/>
 </RelativeLayout>

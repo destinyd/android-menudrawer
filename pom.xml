@@ -23,6 +23,7 @@
         <module>menudrawer</module>
         <module>menudrawer-samples</module>
         <module>menudrawer-samples2</module>
+        <module>android-menudrawer-fragment-samples</module>
     </modules>
 
     <scm>

@@ -9,7 +9,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="toActivity1"
+        android:text="default opening_offset 5"
         android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -18,7 +18,7 @@
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="toActivity2"
+            android:text="set_foreground_opening_offset 50"
             android:gravity="center"
             android:layout_below="@+id/button1"
             android:layout_alignParentLeft="true"
@@ -28,7 +28,7 @@
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="toActivity3"
+            android:text="set_foreground_opening_offset 100"
             android:gravity="center"
             android:layout_below="@+id/button2"
             android:layout_alignParentLeft="true"
@@ -37,7 +37,7 @@
     <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="toActivity4"
+            android:text="set_foreground_opening_offset 1"
             android:gravity="center"
             android:layout_below="@+id/button3"
             android:layout_alignParentLeft="true"

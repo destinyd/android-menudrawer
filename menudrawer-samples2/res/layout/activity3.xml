@@ -10,7 +10,7 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="activity3"
+            android:text="set_foreground_opening_offset 100"
             android:gravity="center"
             android:layout_centerInParent="true"
             android:id="@+id/textView"/>
