@@ -507,7 +507,7 @@ public abstract class MenuDrawer extends ViewGroup {
      * Attaches the menu drawer to the window.
      */
     private static void attachToDecor(Activity activity, MenuDrawer menuDrawer) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
@@ -1476,7 +1476,7 @@ public abstract class MenuDrawer extends ViewGroup {
 //原始代码
 //        mMenuContainer.setPadding(0, insets.top, 0, 0);
             // fix actionbar title bug start
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
                 // 2.3 bug
                 // 直接返回 有bug, 执行后状态栏盖住一半actionbar
 
