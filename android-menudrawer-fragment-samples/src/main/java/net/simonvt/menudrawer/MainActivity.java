@@ -1,6 +1,8 @@
 package net.simonvt.menudrawer;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -18,7 +22,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
-public class MainActivity extends SherlockFragmentActivity implements Button.OnClickListener {
+public class MainActivity extends FragmentActivity implements Button.OnClickListener {
 
     private static final String TAG = "MainActivity";
     protected MenuDrawer mMenuDrawer;
@@ -36,12 +40,14 @@ public class MainActivity extends SherlockFragmentActivity implements Button.OnC
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //2.3 必须隐藏状态栏，否则状态栏会挡住actionbar，体验不好
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
+            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mMenuDrawer = MenuDrawer.attach(this, MenuDrawer.Type.BEHIND, Position.TOP, MenuDrawer.MENU_DRAG_WINDOW);
         mMenuDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_FULLSCREEN); //全屏拖动， TOUCH_MODE_BEZEL为边缘拖动
         mMenuDrawer.setMenuView(R.layout.menu);
         mMenuDrawer.setContentView(R.layout.activity_main);
-        mMenuDrawer.setDropShadowEnabled(true);
 
         setMenuBtnsClick();
 
@@ -139,7 +145,12 @@ public class MainActivity extends SherlockFragmentActivity implements Button.OnC
         }
         mMenuDrawer.setDropShadowEnabled(false);
 
-        setMenuSize(displayHeight - actionBarHeight - mMenuDrawer.getTouchBezelSize());
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            setMenuSize(displayHeight - actionBarHeight);
+        }
+        else {
+            setMenuSize(displayHeight - actionBarHeight - mMenuDrawer.getTouchBezelSize());
+        }
     }
 
     private void setMenuSize(int pHeight) {
