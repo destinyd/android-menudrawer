@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import com.github.destinyd.menudrawer.KCVerticalDrawerHandler;
 
 public class MainActivity extends FragmentActivity implements Button.OnClickListener {
@@ -34,14 +35,11 @@ public class MainActivity extends FragmentActivity implements Button.OnClickList
     }
 
     private void set_menu_buttons_click() {
-        Button button1 = (Button) findViewById(R.id.button1);
-        Button button2 = (Button) findViewById(R.id.button2);
-        Button button3 = (Button) findViewById(R.id.button3);
-        Button button4 = (Button) findViewById(R.id.button4);
-        button1.setOnClickListener(this);
-        button2.setOnClickListener(this);
-        button3.setOnClickListener(this);
-        button4.setOnClickListener(this);
+        findViewById(R.id.button1).setOnClickListener(this);
+        findViewById(R.id.button2).setOnClickListener(this);
+        findViewById(R.id.button3).setOnClickListener(this);
+        findViewById(R.id.button4).setOnClickListener(this);
+        findViewById(R.id.button5).setOnClickListener(this);
     }
 
 
@@ -76,6 +74,13 @@ public class MainActivity extends FragmentActivity implements Button.OnClickList
                         R.anim.in_from_bottom, R.anim.out_to_none1);
                 switch_to(transaction, new Fragment4());
                 break;
+
+            case R.id.button5:
+                kcVerticalDrawerHandler.enable_gesture(false);
+                transaction = mFragmentMan.beginTransaction().setCustomAnimations(
+                        R.anim.in_from_bottom, R.anim.out_to_none1);
+                switch_to(transaction, new Fragment5());
+                break;
         }
         kcVerticalDrawerHandler.close();
     }
@@ -93,6 +98,12 @@ public class MainActivity extends FragmentActivity implements Button.OnClickList
 
     public void switch_to(FragmentTransaction transaction, Fragment to) {
         switchContent(transaction, mCurrent, to);
+    }
+
+    public void enable_gesture(View view){
+        kcVerticalDrawerHandler.enable_gesture(true);
+        TextView tv_enable_gesture_status = (TextView) findViewById(R.id.tv_enable_gesture_status);
+        tv_enable_gesture_status.setText("enable_gesture(true) now");
     }
 }
 
