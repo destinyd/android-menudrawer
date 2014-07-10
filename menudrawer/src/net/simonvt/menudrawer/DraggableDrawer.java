@@ -143,8 +143,6 @@ public abstract class DraggableDrawer extends MenuDrawer {
      */
     private Runnable mPeekStartRunnable;
 
-    protected boolean mIsPeeking;
-
     /**
      * Scroller used when animating the drawer open/closed.
      */
@@ -413,7 +411,6 @@ public abstract class DraggableDrawer extends MenuDrawer {
      * Starts peek drawer animation.
      */
     protected void startPeek() {
-        mIsPeeking = true;
         initPeekScroller();
 
         startLayerTranslation();
@@ -459,7 +456,6 @@ public abstract class DraggableDrawer extends MenuDrawer {
 
         setDrawerState(STATE_CLOSED);
         stopLayerTranslation();
-        mIsPeeking = false;
     }
 
     /**
@@ -469,7 +465,6 @@ public abstract class DraggableDrawer extends MenuDrawer {
         removeCallbacks(mPeekStartRunnable);
         removeCallbacks(mPeekRunnable);
         stopLayerTranslation();
-        mIsPeeking = false;
     }
 
     protected boolean isCloseEnough() {
