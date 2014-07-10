@@ -1,62 +1,39 @@
 package com.github.destinyd.menudrawer.samples;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
-import com.github.destinyd.menudrawer.MenuDrawer;
-import com.github.destinyd.menudrawer.Position;
+import com.github.destinyd.menudrawer.KCVerticalDrawerHandler;
 
 public class MainActivity extends FragmentActivity implements Button.OnClickListener {
 
     private static final String TAG = "MainActivity";
-    protected MenuDrawer mMenuDrawer;
-    private int foreground_opening_offset_dp = 0;
     Fragment mCurrent = null;
     FragmentManager mFragmentMan;
+    KCVerticalDrawerHandler kcVerticalDrawerHandler;
 
-    /**
-     * Called when the activity is first created.
-     *
-     * @param savedInstanceState If the activity is being re-initialized after
-     *                           previously being shut down then this Bundle contains the data it most
-     *                           recently supplied in onSaveInstanceState(Bundle). <b>Note: Otherwise it is null.</b>
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //2.3 必须隐藏状态栏，否则状态栏会挡住actionbar，体验不好
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
-            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        mMenuDrawer = MenuDrawer.attach(this, MenuDrawer.Type.BEHIND, Position.TOP, MenuDrawer.MENU_DRAG_WINDOW);
-        mMenuDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_FULLSCREEN); //全屏拖动， TOUCH_MODE_BEZEL为边缘拖动
-        mMenuDrawer.setMenuView(R.layout.menu);
-        mMenuDrawer.setContentView(R.layout.activity_main);
+        kcVerticalDrawerHandler = new KCVerticalDrawerHandler(this);
+        kcVerticalDrawerHandler.add_background_view(R.layout.menu);
+        kcVerticalDrawerHandler.add_foreground_view(R.layout.activity_main);
 
-        setMenuBtnsClick();
-
-        setMenuSize();
+        set_menu_buttons_click();
 
         mFragmentMan = getSupportFragmentManager();
 
-        FragmentTransaction transaction = mFragmentMan.beginTransaction()
-                ;//.setCustomAnimations(android.R.anim.fade_out, R.anim.out_to_none1);
+        FragmentTransaction transaction = mFragmentMan.beginTransaction();//.setCustomAnimations(android.R.anim.fade_out, R.anim.out_to_none1);
         mCurrent = new Fragment1();
         transaction.add(R.id.fl_main, mCurrent).commit();
-
     }
 
-
-    private void setMenuBtnsClick() {
+    private void set_menu_buttons_click() {
         Button button1 = (Button) findViewById(R.id.button1);
         Button button2 = (Button) findViewById(R.id.button2);
         Button button3 = (Button) findViewById(R.id.button3);
@@ -73,87 +50,39 @@ public class MainActivity extends FragmentActivity implements Button.OnClickList
         FragmentTransaction transaction;
         switch (v.getId()) {
             case R.id.button1:
-//                startActivity(new Intent(this, Activity1.class));
-//                mMenuDrawer.closeMenu();
-                set_foreground_opening_offset(0);
-//                getSupportActionBar().hide();
+                kcVerticalDrawerHandler.set_foreground_opening_offset(0);
                 transaction = mFragmentMan.beginTransaction().setCustomAnimations(
                         R.anim.in_from_bottom, R.anim.out_to_none);
                 switch_to(transaction, new Fragment1());
                 break;
 
             case R.id.button2:
-//                startActivity(new Intent(this, Activity2.class));
-//                mMenuDrawer.closeMenu();
-                set_foreground_opening_offset(50);
-//                getSupportActionBar().hide();
+                kcVerticalDrawerHandler.set_foreground_opening_offset(50);
                 transaction = mFragmentMan.beginTransaction().setCustomAnimations(
                         R.anim.in_from_bottom, R.anim.out_to_none1);
                 switch_to(transaction, new Fragment2());
                 break;
 
             case R.id.button3:
-//                startActivity(new Intent(this, Activity3.class));
-//                mMenuDrawer.closeMenu();
-                set_foreground_opening_offset(100);
-//                getSupportActionBar().show();
+                kcVerticalDrawerHandler.set_foreground_opening_offset(100);
                 transaction = mFragmentMan.beginTransaction().setCustomAnimations(
                         R.anim.in_from_bottom, R.anim.out_to_top);
                 switch_to(transaction, new Fragment3());
                 break;
 
             case R.id.button4:
-//                startActivity(new Intent(this, Activity4.class));
-//                mMenuDrawer.closeMenu();
-                set_foreground_opening_offset(1);
-//                getSupportActionBar().show();
+                kcVerticalDrawerHandler.set_foreground_opening_offset(1);
                 transaction = mFragmentMan.beginTransaction().setCustomAnimations(
                         R.anim.in_from_bottom, R.anim.out_to_none1);
                 switch_to(transaction, new Fragment4());
                 break;
         }
-        mMenuDrawer.closeMenu();
-    }
-
-    public void set_foreground_opening_offset(int offset_dp) {
-        foreground_opening_offset_dp = offset_dp;
-        setMenuSize();
-    }
-
-    private void setMenuSize() {
-//        set_foreground_opening_offset(50);
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        int displayHeight = metrics.heightPixels;
-        Log.e(TAG, "displayHeight:" + displayHeight);
-
-        int actionBarHeight = 0;
-        TypedValue tv = new TypedValue();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
-                actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-        } else if (getTheme().resolveAttribute(com.actionbarsherlock.R.attr.actionBarSize, tv, true)) {
-            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-        }
-        mMenuDrawer.setDropShadowEnabled(false);
-
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-            setMenuSize(displayHeight - actionBarHeight);
-        }
-        else {
-            setMenuSize(displayHeight - actionBarHeight - mMenuDrawer.getTouchBezelSize());
-        }
-    }
-
-    private void setMenuSize(int pHeight) {
-        int height = pHeight - mMenuDrawer.dpToPx(foreground_opening_offset_dp);// - mMenuDrawer.getTouchBezelSize()
-        mMenuDrawer.setMenuSize(height);
+        kcVerticalDrawerHandler.close();
     }
 
     public void switchContent(FragmentTransaction transaction, Fragment from, Fragment to) {
         if (mCurrent != to) {
             mCurrent = to;
-//            FragmentTransaction transaction = mFragmentMan.beginTransaction().setCustomAnimations(
-//                    R.anim.in_from_bottom, R.anim.out_to_none1);
             if (!to.isAdded()) {    // 先判断是否被add过
                 transaction.hide(from).add(R.id.fl_main, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
             } else {
