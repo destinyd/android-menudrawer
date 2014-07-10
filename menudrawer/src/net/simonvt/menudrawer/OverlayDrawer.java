@@ -20,7 +20,7 @@ public class OverlayDrawer extends DraggableDrawer {
         public void run() {
             cancelContentTouch();
             int animateTo = 0;
-            switch (getPosition()) {
+            switch (mPosition) {
                 case RIGHT:
                 case BOTTOM:
                     animateTo = -mPeekSize;
@@ -69,7 +69,7 @@ public class OverlayDrawer extends DraggableDrawer {
         final int offsetPixels = (int) mOffsetPixels;
         final float openRatio = Math.abs(mOffsetPixels) / mMenuSize;
 
-        switch (getPosition()) {
+        switch (mPosition) {
             case LEFT:
                 mMenuOverlay.setBounds(offsetPixels, 0, width, height);
                 break;
@@ -94,7 +94,7 @@ public class OverlayDrawer extends DraggableDrawer {
     @Override
     public void openMenu(boolean animate) {
         int animateTo = 0;
-        switch (getPosition()) {
+        switch (mPosition) {
             case LEFT:
             case TOP:
                 animateTo = mMenuSize;
@@ -117,7 +117,7 @@ public class OverlayDrawer extends DraggableDrawer {
     @Override
     protected void onOffsetPixelsChanged(int offsetPixels) {
         if (USE_TRANSLATIONS) {
-            switch (getPosition()) {
+            switch (mPosition) {
                 case LEFT:
                     mMenuContainer.setTranslationX(offsetPixels - mMenuSize);
                     break;
@@ -135,7 +135,7 @@ public class OverlayDrawer extends DraggableDrawer {
                     break;
             }
         } else {
-            switch (getPosition()) {
+            switch (mPosition) {
                 case TOP:
                     mMenuContainer.offsetTopAndBottom(offsetPixels - mMenuContainer.getBottom());
                     break;
@@ -159,7 +159,7 @@ public class OverlayDrawer extends DraggableDrawer {
 
     @Override
     protected void initPeekScroller() {
-        switch (getPosition()) {
+        switch (mPosition) {
             case RIGHT:
             case BOTTOM: {
                 final int dx = -mPeekSize;
@@ -183,7 +183,7 @@ public class OverlayDrawer extends DraggableDrawer {
 
     @Override
     protected GradientDrawable.Orientation getDropShadowOrientation() {
-        switch (getPosition()) {
+        switch (mPosition) {
             case TOP:
                 return GradientDrawable.Orientation.TOP_BOTTOM;
 
@@ -203,7 +203,7 @@ public class OverlayDrawer extends DraggableDrawer {
         final float openRatio = Math.abs(mOffsetPixels) / mMenuSize;
         final int dropShadowSize = (int) (mDropShadowSize * openRatio);
 
-        switch (getPosition()) {
+        switch (mPosition) {
             case LEFT:
                 mDropShadowRect.top = 0;
                 mDropShadowRect.bottom = getHeight();
@@ -258,7 +258,7 @@ public class OverlayDrawer extends DraggableDrawer {
         mContentContainer.layout(0, 0, width, height);
 
         if (USE_TRANSLATIONS) {
-            switch (getPosition()) {
+            switch (mPosition) {
                 case LEFT:
                     mMenuContainer.layout(0, 0, mMenuSize, height);
                     break;
@@ -280,7 +280,7 @@ public class OverlayDrawer extends DraggableDrawer {
             final int offsetPixels = (int) mOffsetPixels;
             final int menuSize = mMenuSize;
 
-            switch (getPosition()) {
+            switch (mPosition) {
                 case LEFT:
                     mMenuContainer.layout(-menuSize + offsetPixels, 0, offsetPixels, height);
                     break;
@@ -316,7 +316,7 @@ public class OverlayDrawer extends DraggableDrawer {
 
         int menuWidthMeasureSpec;
         int menuHeightMeasureSpec;
-        switch (getPosition()) {
+        switch (mPosition) {
             case TOP:
             case BOTTOM:
                 menuWidthMeasureSpec = getChildMeasureSpec(widthMeasureSpec, 0, width);
@@ -342,7 +342,7 @@ public class OverlayDrawer extends DraggableDrawer {
     private boolean isContentTouch(int x, int y) {
         boolean contentTouch = false;
 
-        switch (getPosition()) {
+        switch (mPosition) {
             case LEFT:
                 contentTouch = ViewHelper.getRight(mMenuContainer) < x;
                 break;
@@ -364,7 +364,7 @@ public class OverlayDrawer extends DraggableDrawer {
     }
 
     protected boolean onDownAllowDrag(int x, int y) {
-        switch (getPosition()) {
+        switch (mPosition) {
             case LEFT:
                 return (!mMenuVisible && mInitialMotionX <= mTouchSize)
                         || (mMenuVisible && mInitialMotionX <= mOffsetPixels);
@@ -394,7 +394,7 @@ public class OverlayDrawer extends DraggableDrawer {
             return true;
         }
 
-        switch (getPosition()) {
+        switch (mPosition) {
             case LEFT:
                 return (!mMenuVisible && mInitialMotionX <= mTouchSize && (dx > 0)) // Drawer closed
                         || (mMenuVisible && x <= mOffsetPixels) // Drawer open
@@ -422,7 +422,7 @@ public class OverlayDrawer extends DraggableDrawer {
     }
 
     protected void onMoveEvent(float dx, float dy) {
-        switch (getPosition()) {
+        switch (mPosition) {
             case LEFT:
                 setOffsetPixels(Math.min(Math.max(mOffsetPixels + dx, 0), mMenuSize));
                 break;
@@ -444,7 +444,7 @@ public class OverlayDrawer extends DraggableDrawer {
     protected void onUpEvent(int x, int y) {
         final int offsetPixels = (int) mOffsetPixels;
 
-        switch (getPosition()) {
+        switch (mPosition) {
             case LEFT: {
                 if (mIsDragging) {
                     mVelocityTracker.computeCurrentVelocity(1000, mMaxVelocity);
@@ -506,7 +506,7 @@ public class OverlayDrawer extends DraggableDrawer {
     }
 
     protected boolean checkTouchSlop(float dx, float dy) {
-        switch (getPosition()) {
+        switch (mPosition) {
             case TOP:
             case BOTTOM:
                 return Math.abs(dy) > mTouchSlop && Math.abs(dy) > Math.abs(dx);

@@ -14,8 +14,6 @@ public class SlideDrawable extends Drawable implements Drawable.Callback {
 
     private final Rect mTmpRect = new Rect();
 
-    private boolean mIsRtl;
-
     public SlideDrawable(Drawable wrapped) {
         mWrapped = wrapped;
     }
@@ -29,20 +27,11 @@ public class SlideDrawable extends Drawable implements Drawable.Callback {
         return mOffset;
     }
 
-    void setIsRtl(boolean isRtl) {
-        mIsRtl = isRtl;
-        invalidateSelf();
-    }
-
     @Override
     public void draw(Canvas canvas) {
         mWrapped.copyBounds(mTmpRect);
         canvas.save();
-        if (mIsRtl) {
-            canvas.translate(1.f / 3 * mTmpRect.width() * mOffset, 0);
-        } else {
-            canvas.translate(1.f / 3 * mTmpRect.width() * -mOffset, 0);
-        }
+        canvas.translate(1.f / 3 * mTmpRect.width() * -mOffset, 0);
         mWrapped.draw(canvas);
         canvas.restore();
     }
