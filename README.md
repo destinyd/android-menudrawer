@@ -1,109 +1,58 @@
-MenuDrawer
-==========
+Android KCVerticalDrawerHandler
+===========
+纵向抽屉导航。
 
-A slide-out menu implementation, which allows users to navigate between views
-in your app. Most commonly the menu is revealed by either dragging the edge
-of the screen, or clicking the 'up' button in the action bar.
+## 如何引用此组件：
+### 安装
+```
+git clone https://github.com/mindpin/android-menudrawer
+cd android-menudrawer
+mvn clean install
+```
 
+### maven引用
+在maven项目，pom.xml添加以下依赖引用：
 
-Features
---------
+```
+<dependency>
+    <groupId>com.github.destinyd</groupId>
+    <artifactId>menudrawer</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <type>apklib</type>
+</dependency>
+```
 
- * The menu can be positioned along all four edges.
- * Supports attaching an always visible, non-draggable menu, which is useful
-   on e.g. tablets.
- * The menu can wrap both the content and the entire window.
- * Allows the drawer to be opened by dragging the edge, the entire screen or
-   not at all.
- * Can be used in XML layouts.
- * Indicator that shows which screen is currently visible.
-
-
-Usage
-=====
-
-This library is very simple to use. It requires no extension of custom classes,
-it's simply added to an activity by calling one of the `MenuDrawer#attach(...)`
-methods.
-
-For more examples on how to use this library, check out the sample app.
-
-
-Left menu
----------
-```java
-public class SampleActivity extends Activity {
-
-    private MenuDrawer mDrawer;
-
-    @Override
-    protected void onCreate(Bundle state) {
-        super.onCreate(state);
-        mDrawer = MenuDrawer.attach(this);
-        mDrawer.setContentView(R.layout.activity_sample);
-        mDrawer.setMenuView(R.layout.menu_sample);
+## 使用说明
+```
+public class MainActivity extends Activity{
+  @Override
+    public void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      //注入
+      KCVerticalDrawerHandler kcVerticalDrawerHandler = new KCVerticalDrawerHandler(this);
+      //设置背景view，即menu view
+      kcVerticalDrawerHandler.add_background_view(R.layout.menu);
+      //设置前景view，即content view
+      kcVerticalDrawerHandler.add_foreground_view(R.layout.activity_main);
     }
 }
 ```
 
-
-Right menu
-----------
-```java
-public class SampleActivity extends Activity {
-
-    private MenuDrawer mDrawer;
-
-    @Override
-    protected void onCreate(Bundle state) {
-        super.onCreate(state);
-        mDrawer = MenuDrawer.attach(this, Position.RIGHT);
-        mDrawer.setContentView(R.layout.activity_sample);
-        mDrawer.setMenuView(R.layout.menu_sample);
-    }
-}
+## 其余api介绍
 ```
+// 增加背景 View
+public void add_background_view(View view);
 
+// 增加前景 View
+public void add_foreground_view(View view);
 
-Including in your project
-=========================
+// 打开和关闭背景View
+public void open();
+public void close();
 
-Either include it in your project as an android library project, or grab it via maven:
+// 设置 open 时，前景向下滑动后保留的露出的部分高度，以dp为单位。
+public void set_foreground_opening_offset(int offset_dp);
 
-    <dependency>
-        <groupId>net.simonvt.menudrawer</groupId>
-        <artifactId>menudrawer</artifactId>
-        <version>{latest.version}</version>
-        <type>apklib</type>
-    </dependency>
-
-
-Credits
-=======
-
- * Cyril Mottier for his [articles][1] on the pattern
-
-
-License
-=======
-
-    Copyright 2012 Simon Vig Therkildsen
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
-
-
-
-
-
- [1]: http://android.cyrilmottier.com/?p=658
+// 切换手势支持
+public void enable_gesture(boolean flag);
+```

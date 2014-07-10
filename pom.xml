@@ -9,7 +9,7 @@
     <version>0.1.0-SNAPSHOT</version>
 
     <name>Android MenuDrawer (Parent)</name>
-    <description>A menu drawer implementation which allows dragging of both the content, and the entire window.</description>
+    <description>纵向抽屉导航。</description>
     <inceptionYear>2014</inceptionYear>
 
     <modules>
