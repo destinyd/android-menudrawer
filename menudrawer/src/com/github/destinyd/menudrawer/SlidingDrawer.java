@@ -3,7 +3,9 @@ package com.github.destinyd.menudrawer;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 
@@ -54,7 +56,10 @@ public class SlidingDrawer extends DraggableDrawer {
 
     @Override
     public void closeMenu(boolean animate) {
-        animateOffsetTo(0, 0, animate);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+            animateOffsetTo(top, 0, animate);
+        else
+            animateOffsetTo(0, 0, animate);
     }
 
     @Override
@@ -74,6 +79,10 @@ public class SlidingDrawer extends DraggableDrawer {
             switch (mPosition) {
                 case TOP:
                 case BOTTOM:
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+                        if (offsetPixels < top)
+                            offsetPixels = top;
+                    }
                     mContentContainer.offsetTopAndBottom(offsetPixels - mContentContainer.getTop());
                     break;
 
@@ -152,7 +161,12 @@ public class SlidingDrawer extends DraggableDrawer {
             if (mPosition == Position.LEFT || mPosition == Position.RIGHT) {
                 mContentContainer.layout(offsetPixels, 0, width + offsetPixels, height);
             } else {
-                mContentContainer.layout(0, offsetPixels, width, height + offsetPixels);
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+                    mContentContainer.layout(0, offsetPixels + top, width, height + offsetPixels);
+                }
+                else {
+                    mContentContainer.layout(0, offsetPixels, width, height + offsetPixels);
+                }
             }
         }
 

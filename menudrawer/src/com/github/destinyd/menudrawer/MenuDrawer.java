@@ -387,6 +387,9 @@ public abstract class MenuDrawer extends ViewGroup {
      */
     protected boolean mDrawOverlay;
 
+
+    protected int top = 0;
+
     /**
      * Attaches the MenuDrawer to the Activity.
      *
@@ -507,9 +510,6 @@ public abstract class MenuDrawer extends ViewGroup {
      * Attaches the menu drawer to the window.
      */
     private static void attachToDecor(Activity activity, MenuDrawer menuDrawer) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
         ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
         ViewGroup decorChild = (ViewGroup) decorView.getChildAt(0);
 
@@ -1472,22 +1472,17 @@ public abstract class MenuDrawer extends ViewGroup {
 
     @Override
     protected boolean fitSystemWindows(Rect insets) {
-        if (mDragMode == MENU_DRAG_WINDOW) {
-//原始代码
-//        mMenuContainer.setPadding(0, insets.top, 0, 0);
-            // fix actionbar title bug start
+        if (mDragMode == MENU_DRAG_WINDOW && mPosition != Position.BOTTOM) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-                // 2.3 bug
-                // 直接返回 有bug, 执行后状态栏盖住一半actionbar
-
-                //执行后修复menu曾padding-top
+                top = insets.top;
                 mMenuContainer.setPadding(0, insets.top, 0, 0);
-                //执行后statusbar不挡住actionbar，但是有空白， 不执行挡住，无空白
-//                super.fitSystemWindows(insets);
-
-            } else {
+                mContentContainer.setPadding(0, 0, 0, insets.top);
+                return true;
+            }
+            else {
                 ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) this
                         .getLayoutParams();
+
                 int top = params.topMargin + insets.top;
                 int bottom = params.bottomMargin + insets.bottom;
                 int left = params.leftMargin + insets.left;

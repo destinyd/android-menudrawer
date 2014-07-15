@@ -20,8 +20,6 @@ public class KCVerticalDrawerHandler {
     public KCVerticalDrawerHandler(Context context) {
         this.context = context;
         activity = (Activity) context;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
-            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mMenuDrawer = MenuDrawer.attach(activity, MenuDrawer.Type.BEHIND, Position.TOP, MenuDrawer.MENU_DRAG_WINDOW);
         mMenuDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_FULLSCREEN); //全屏拖动， TOUCH_MODE_BEZEL为边缘拖动

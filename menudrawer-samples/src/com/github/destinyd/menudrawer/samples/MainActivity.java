@@ -8,9 +8,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.github.destinyd.menudrawer.KCVerticalDrawerHandler;
 
-public class MainActivity extends FragmentActivity implements Button.OnClickListener {
+public class MainActivity extends SherlockFragmentActivity implements Button.OnClickListener {
 
     private static final String TAG = "MainActivity";
     Fragment mCurrent = null;
@@ -19,6 +20,7 @@ public class MainActivity extends FragmentActivity implements Button.OnClickList
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.SherlockTheme);
         super.onCreate(savedInstanceState);
 
         kcVerticalDrawerHandler = new KCVerticalDrawerHandler(this);
