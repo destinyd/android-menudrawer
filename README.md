@@ -32,7 +32,7 @@ public class MainActivity extends Activity{
       KCVerticalDrawerHandler kcVerticalDrawerHandler = new KCVerticalDrawerHandler(this);
       //设置背景view，即menu view
       kcVerticalDrawerHandler.add_background_view(R.layout.menu);
-      //设置前景view，即content view
+      //设置前景view，即content view，如果已经setContentView，可省略
       kcVerticalDrawerHandler.add_foreground_view(R.layout.activity_main);
     }
 }
