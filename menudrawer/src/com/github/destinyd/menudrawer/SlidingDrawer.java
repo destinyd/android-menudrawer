@@ -56,10 +56,7 @@ public class SlidingDrawer extends DraggableDrawer {
 
     @Override
     public void closeMenu(boolean animate) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
-            animateOffsetTo(top, 0, animate);
-        else
-            animateOffsetTo(0, 0, animate);
+        animateOffsetTo(0, 0, animate);
     }
 
     @Override

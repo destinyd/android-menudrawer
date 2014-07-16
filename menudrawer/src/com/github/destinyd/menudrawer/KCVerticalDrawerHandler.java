@@ -4,14 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.WindowManager;
 
 /**
  * Created by dd on 14-7-10.
  */
 public class KCVerticalDrawerHandler {
+    private static final String TAG = "KCVerticalDrawerHandler";
     protected MenuDrawer mMenuDrawer;
     private Context context;
     private Activity activity;
@@ -89,14 +90,11 @@ public class KCVerticalDrawerHandler {
                 actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
         } else if (context.getTheme().resolveAttribute(com.actionbarsherlock.R.attr.actionBarSize, tv, true)) {
             actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
+        } else { // 2.x
+            //不需要做任何处理
         }
-        mMenuDrawer.setDropShadowEnabled(false);
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-            setMenuSize(displayHeight - actionBarHeight);
-        } else {
-            setMenuSize(displayHeight - actionBarHeight - mMenuDrawer.getTouchBezelSize());
-        }
+        setMenuSize(displayHeight - actionBarHeight);
     }
 
     private void setMenuSize(int pHeight) {
