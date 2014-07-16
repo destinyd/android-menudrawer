@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".SherlockFragment"/>
         <activity android:name=".SimpleFragment"/>
+        <activity android:name=".SimpleActivity"/>
+        <activity android:name=".SimpleSherlockActivity"/>
     </application>
 
 </manifest>

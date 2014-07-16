@@ -37,8 +37,10 @@ public class MainActivity extends ListActivity {
 
     private List<? extends Map<String, ?>> getData() {
         List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
-        addItem(data, "simple activity", SimpleFragment.class);
-        addItem(data, "sherlock activity", SherlockFragment.class);
+        addItem(data, "simple activity", SimpleActivity.class);
+        addItem(data, "sherlock activity", SimpleSherlockActivity.class);
+        addItem(data, "simple fragment activity", SimpleFragment.class);
+        addItem(data, "sherlock fragment activity", SherlockFragment.class);
 
         return data;
     }
