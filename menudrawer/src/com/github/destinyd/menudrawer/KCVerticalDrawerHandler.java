@@ -7,11 +7,13 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import com.github.destinyd.menudrawer.common.SystemWindow;
 
 /**
  * Created by dd on 14-7-10.
  */
 public class KCVerticalDrawerHandler {
+    private static final int FROYO_TITLEBAR_HEIGHT = 36;
     private static final String TAG = "KCVerticalDrawerHandler";
     protected MenuDrawer mMenuDrawer;
     private Context context;
@@ -86,14 +88,24 @@ public class KCVerticalDrawerHandler {
         int actionBarHeight = 0;
         TypedValue tv = new TypedValue();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
+            if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
                 actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
-        } else if (context.getTheme().resolveAttribute(com.actionbarsherlock.R.attr.actionBarSize, tv, true)) {
-            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
-        } else { // 2.x
-            //不需要做任何处理
+                int statusBarHeight = SystemWindow.get_statusbar_height(context);
+
+                setMenuSize(displayHeight - actionBarHeight - statusBarHeight);
+                return;
+            }
+        } else {
+            if (context.getTheme().resolveAttribute(com.actionbarsherlock.R.attr.actionBarSize, tv, true)) {
+                // use sherlock actionbar
+                actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
+            } else {
+                // 2.x normal
+                actionBarHeight = FROYO_TITLEBAR_HEIGHT;
+            }
         }
 
+        // 3.x ?
         setMenuSize(displayHeight - actionBarHeight);
     }
 
