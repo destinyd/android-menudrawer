@@ -50,13 +50,14 @@ public void add_foreground_view(View view);
 public void open();
 public void close();
 
-// 设置 open 时，前景向下滑动后保留的露出的部分高度，以dp为单位。
-public void set_foreground_opening_offset(int offset_dp);
-
 // 切换手势支持
 public void enable_gesture(boolean flag);
 
-//设置底部留空是否包括titlebar,默认为true（包括）
-//设置为false请自行set_foreground_opening_offset，否则可能导致划出Menu无法用手势关闭
+// 存在或者不存在默认标题栏
 enable_default_titlebar(boolean isShow);
+
+// 设置 open 时，前景向下滑动后保留的露出的部分高度，以dp为单位。
+// 当标题栏存在时，底部留空的是 blank_dp + titlebar_height
+// 当标题栏不存在时，底部留空的是 blank_dp
+public void set_foreground_opening_offset(int offset_dp);
 ```

@@ -1,11 +1,16 @@
 package com.github.destinyd.menudrawer.common;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.View;
+import com.actionbarsherlock.app.ActionBar;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created by dd on 14-7-16.
@@ -44,5 +49,27 @@ public class DisplayModule {
 
     public static int dp_to_px(Context context, int dp) {
         return (int) (context.getResources().getDisplayMetrics().density * dp + 0.5f);
+    }
+
+
+    public static void display_default_titlebar(Activity activity, boolean isShow) {
+        if (isShow) {
+            if (activity.findViewById(android.R.id.title) != null)
+                ((View) activity.findViewById(android.R.id.title).getParent()).setVisibility(View.VISIBLE);
+        } else {
+
+            if (activity.findViewById(android.R.id.title) != null)
+                ((View) activity.findViewById(android.R.id.title).getParent()).setVisibility(View.GONE);
+        }
+    }
+
+    public static void display_sherlock(Activity activity, boolean isShow) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        Class clazz = activity.getClass();
+        Method method = clazz.getMethod("getSupportActionBar");
+        ActionBar actionBar = (ActionBar) method.invoke(activity);
+        if (isShow)
+            actionBar.show();
+        else
+            actionBar.hide();
     }
 }

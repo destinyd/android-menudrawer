@@ -3,17 +3,20 @@ package com.github.destinyd.menudrawer;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+import com.actionbarsherlock.app.ActionBar;
 import com.github.destinyd.menudrawer.common.DisplayModule;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created by dd on 14-7-10.
  */
 public class KCVerticalDrawerHandler {
     private static final int FROYO_TITLEBAR_HEIGHT = 36;
-//    private static final int DEFAULT_SHOW_DP = 10;
+    //    private static final int DEFAULT_SHOW_DP = 10;
     private static final boolean ENABLE_DEFAULT_TITLEBAR = true;
     private boolean bShowTitlebar = ENABLE_DEFAULT_TITLEBAR;
     private static final String TAG = "KCVerticalDrawerHandler";
@@ -107,7 +110,7 @@ public class KCVerticalDrawerHandler {
         }
         // 3.x ?
 
-        if(bShowTitlebar)
+        if (bShowTitlebar)
             setMenuSize(displayHeight - actionBarHeight);
         else
             setMenuSize(displayHeight);
@@ -118,10 +121,23 @@ public class KCVerticalDrawerHandler {
         mMenuDrawer.setMenuSize(height);
     }
 
-    public void enable_default_titlebar(boolean isShow){
-        if(bShowTitlebar != isShow) {
+    // 存在或者不存在默认标题栏
+    public void enable_default_titlebar(boolean isShow) {
+        if (bShowTitlebar != isShow) {
             bShowTitlebar = isShow;
+            display_titlebar(isShow);
             setMenuSize();
         }
     }
+
+    private void display_titlebar(boolean isShow) {
+        try {
+            DisplayModule.display_default_titlebar(activity, isShow);
+            DisplayModule.display_sherlock(activity, isShow);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mMenuDrawer.requestLayout();
+    }
+
 }
