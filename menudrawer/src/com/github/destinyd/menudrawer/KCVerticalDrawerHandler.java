@@ -4,16 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
-import com.github.destinyd.menudrawer.common.SystemWindow;
+import com.github.destinyd.menudrawer.common.DisplayModule;
 
 /**
  * Created by dd on 14-7-10.
  */
 public class KCVerticalDrawerHandler {
     private static final int FROYO_TITLEBAR_HEIGHT = 36;
+//    private static final int DEFAULT_SHOW_DP = 10;
+    private static final boolean ENABLE_DEFAULT_TITLEBAR = true;
+    private boolean bShowTitlebar = ENABLE_DEFAULT_TITLEBAR;
     private static final String TAG = "KCVerticalDrawerHandler";
     protected MenuDrawer mMenuDrawer;
     private Context context;
@@ -82,15 +84,14 @@ public class KCVerticalDrawerHandler {
     }
 
     private void setMenuSize() {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        int displayHeight = metrics.heightPixels;
+        int displayHeight = DisplayModule.get_display_height(context);
 
         int actionBarHeight = 0;
         TypedValue tv = new TypedValue();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
                 actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
-                int statusBarHeight = SystemWindow.get_statusbar_height(context);
+                int statusBarHeight = DisplayModule.get_statusbar_height(context);
 
                 setMenuSize(displayHeight - actionBarHeight - statusBarHeight);
                 return;
@@ -104,13 +105,23 @@ public class KCVerticalDrawerHandler {
                 actionBarHeight = FROYO_TITLEBAR_HEIGHT;
             }
         }
-
         // 3.x ?
-        setMenuSize(displayHeight - actionBarHeight);
+
+        if(bShowTitlebar)
+            setMenuSize(displayHeight - actionBarHeight);
+        else
+            setMenuSize(displayHeight);
     }
 
     private void setMenuSize(int pHeight) {
-        int height = pHeight - mMenuDrawer.dpToPx(foreground_opening_offset_dp);// - mMenuDrawer.getTouchBezelSize()
+        int height = pHeight - DisplayModule.dp_to_px(context, foreground_opening_offset_dp);// - mMenuDrawer.getTouchBezelSize()
         mMenuDrawer.setMenuSize(height);
+    }
+
+    public void enable_default_titlebar(boolean isShow){
+        if(bShowTitlebar != isShow) {
+            bShowTitlebar = isShow;
+            setMenuSize();
+        }
     }
 }

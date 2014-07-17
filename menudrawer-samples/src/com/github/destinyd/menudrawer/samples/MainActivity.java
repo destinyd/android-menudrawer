@@ -41,6 +41,10 @@ public class MainActivity extends ListActivity {
         addItem(data, "sherlock activity", SimpleSherlockActivity.class);
         addItem(data, "simple fragment activity", SimpleFragment.class);
         addItem(data, "sherlock fragment activity", SherlockFragment.class);
+        addItem(data, "enable_default_titlebar(false)", DisableTitlebarActivity.class);
+        addItem(data, "enable_default_titlebar(false) sherlock", DisableTitlebarSherlockActivity.class);
+        addItem(data, "enable_default_titlebar(true) offset", SimpleOffsetActivity.class);
+        addItem(data, "enable_default_titlebar(false) offset", DisableTitlebarOffsetActivity.class);
 
         return data;
     }

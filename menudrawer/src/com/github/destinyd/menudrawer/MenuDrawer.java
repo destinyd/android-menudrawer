@@ -2,6 +2,7 @@ package com.github.destinyd.menudrawer;
 
 import android.graphics.*;
 import android.view.*;
+import com.github.destinyd.menudrawer.common.DisplayModule;
 import com.github.destinyd.menudrawer.compat.ActionBarHelper;
 
 import android.app.Activity;
@@ -624,8 +625,8 @@ public abstract class MenuDrawer extends ViewGroup {
         }
     }
 
-    public int dpToPx(int dp) {
-        return (int) (getResources().getDisplayMetrics().density * dp + 0.5f);
+    protected int dpToPx(int dp) {
+        return DisplayModule.dp_to_px(getContext(), dp);
     }
 
     protected boolean isViewDescendant(View v) {

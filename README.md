@@ -55,4 +55,8 @@ public void set_foreground_opening_offset(int offset_dp);
 
 // 切换手势支持
 public void enable_gesture(boolean flag);
+
+//设置底部留空是否包括titlebar,默认为true（包括）
+//设置为false请自行set_foreground_opening_offset，否则可能导致划出Menu无法用手势关闭
+enable_default_titlebar(boolean isShow);
 ```

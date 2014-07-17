@@ -2,6 +2,7 @@ package com.github.destinyd.menudrawer.common;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
 import java.lang.reflect.Field;
@@ -9,7 +10,7 @@ import java.lang.reflect.Field;
 /**
  * Created by dd on 14-7-16.
  */
-public class SystemWindow {
+public class DisplayModule {
     public static int get_statusbar_height(Context context) {
         Class c;
         try {
@@ -34,5 +35,14 @@ public class SystemWindow {
             return TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
         }
         return 0;
+    }
+
+    public static int get_display_height(Context context) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return metrics.heightPixels;
+    }
+
+    public static int dp_to_px(Context context, int dp) {
+        return (int) (context.getResources().getDisplayMetrics().density * dp + 0.5f);
     }
 }
