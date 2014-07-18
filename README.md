@@ -2,6 +2,10 @@ Android KCVerticalDrawerHandler
 ===========
 纵向抽屉导航。
 
+默认绑定时，底部留空的高度正好为titlebar（actionbar）高度，支持sherlock actionbar。
+
+可以通过**set_foreground_opening_offset(int offset)**设置底部留空高度。0为不留空，不能通过点击或者滑动关闭。
+
 ## 如何引用此组件：
 ### 安装
 ```
