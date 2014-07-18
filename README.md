@@ -57,11 +57,8 @@ public void close();
 // 切换手势支持
 public void enable_gesture(boolean flag);
 
-// 存在或者不存在默认标题栏
-enable_default_titlebar(boolean isShow);
-
-// 设置 open 时，前景向下滑动后保留的露出的部分高度，以dp为单位。
-// 当标题栏存在时，底部留空的是 blank_dp + titlebar_height
-// 当标题栏不存在时，底部留空的是 blank_dp
+// 设置前景向下滑动后保留的露出的部分高度，以dp为单位。
+// 默认为titlebar_height
+// 若自定义titlebar时，请记得调用此函数设置露出高度。
 public void set_foreground_opening_offset(int offset_dp);
 ```
