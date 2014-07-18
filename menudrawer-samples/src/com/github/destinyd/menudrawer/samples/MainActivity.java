@@ -42,6 +42,7 @@ public class MainActivity extends ListActivity {
         addItem(data, "functions", SimpleFragment.class);
         addItem(data, "sherlock functions", SherlockFragment.class);
         addItem(data, "set_foreground_opening_offset(10)", SimpleOffsetActivity.class);
+        addItem(data, "custom actionbar", CustomActionbarActivity.class);
 
         return data;
     }

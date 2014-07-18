@@ -24,8 +24,8 @@
         <activity android:name=".SimpleFragment"/>
         <activity android:name=".SimpleActivity"/>
         <activity android:name=".SimpleSherlockActivity"/>
-        <activity android:name=".DisableTitlebarActivity"/>
         <activity android:name=".SimpleOffsetActivity"/>
+        <activity android:name=".CustomActionbarActivity"/>
     </application>
 
 </manifest>

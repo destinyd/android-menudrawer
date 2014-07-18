@@ -25,4 +25,7 @@
         -->
     </style>
 
+    <style name="NoTitleBarTheme" parent="@android:style/Theme.NoTitleBar">
+    </style>
+
 </resources>
