@@ -37,14 +37,11 @@ public class MainActivity extends ListActivity {
 
     private List<? extends Map<String, ?>> getData() {
         List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
-        addItem(data, "simple activity", SimpleActivity.class);
-        addItem(data, "sherlock activity", SimpleSherlockActivity.class);
-        addItem(data, "simple fragment activity", SimpleFragment.class);
-        addItem(data, "sherlock fragment activity", SherlockFragment.class);
-        addItem(data, "enable_default_titlebar(false)", DisableTitlebarActivity.class);
-        addItem(data, "enable_default_titlebar(false) sherlock", DisableTitlebarSherlockActivity.class);
-        addItem(data, "enable_default_titlebar(true) offset", SimpleOffsetActivity.class);
-        addItem(data, "enable_default_titlebar(false) offset", DisableTitlebarOffsetActivity.class);
+        addItem(data, "simple", SimpleActivity.class);
+        addItem(data, "sherlock", SimpleSherlockActivity.class);
+        addItem(data, "functions", SimpleFragment.class);
+        addItem(data, "sherlock functions", SherlockFragment.class);
+        addItem(data, "set_foreground_opening_offset(10)", SimpleOffsetActivity.class);
 
         return data;
     }

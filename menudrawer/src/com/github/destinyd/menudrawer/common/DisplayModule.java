@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
  * Created by dd on 14-7-16.
  */
 public class DisplayModule {
+    private static final int FROYO_TITLEBAR_HEIGHT = 36;
     public static int get_statusbar_height(Context context) {
         Class c;
         try {
@@ -36,8 +37,13 @@ public class DisplayModule {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
                 return TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
-        } else if (context.getTheme().resolveAttribute(com.actionbarsherlock.R.attr.actionBarSize, tv, true)) {
-            return TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
+        } else {
+            if (context.getTheme().resolveAttribute(com.actionbarsherlock.R.attr.actionBarSize, tv, true)) {
+                return TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
+            }
+            else{
+                return FROYO_TITLEBAR_HEIGHT;
+            }
         }
         return 0;
     }
@@ -51,15 +57,26 @@ public class DisplayModule {
         return (int) (context.getResources().getDisplayMetrics().density * dp + 0.5f);
     }
 
+    public static int px_to_dp(Context context, int px) {
+        return (int) (px / context.getResources().getDisplayMetrics().density + 0.5f);
+    }
+
 
     public static void display_default_titlebar(Activity activity, boolean isShow) {
         if (isShow) {
             if (activity.findViewById(android.R.id.title) != null)
                 ((View) activity.findViewById(android.R.id.title).getParent()).setVisibility(View.VISIBLE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                android.app.ActionBar actionbar = activity.getActionBar();
+                actionbar.show();
+            }
         } else {
-
             if (activity.findViewById(android.R.id.title) != null)
                 ((View) activity.findViewById(android.R.id.title).getParent()).setVisibility(View.GONE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                android.app.ActionBar actionbar = activity.getActionBar();
+                actionbar.hide();
+            }
         }
     }
 

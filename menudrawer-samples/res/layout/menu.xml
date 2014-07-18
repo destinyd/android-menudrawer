@@ -10,7 +10,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="default opening_offset 0"
+        android:text="set_foreground_opening_offset 0"
         android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
