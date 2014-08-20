@@ -41,6 +41,7 @@ public class SimpleFragment extends FragmentActivity implements Button.OnClickLi
         findViewById(R.id.button3).setOnClickListener(this);
         findViewById(R.id.button4).setOnClickListener(this);
         findViewById(R.id.button5).setOnClickListener(this);
+        findViewById(R.id.button6).setOnClickListener(this);
     }
 
 
@@ -81,6 +82,9 @@ public class SimpleFragment extends FragmentActivity implements Button.OnClickLi
                 transaction = mFragmentMan.beginTransaction().setCustomAnimations(
                         R.anim.in_from_bottom, R.anim.out_to_none1);
                 switch_to(transaction, new Fragment5());
+                break;
+            case R.id.button6:
+                kcVerticalDrawerHandler.set_foreground_opening_offset_px(100);
                 break;
         }
         kcVerticalDrawerHandler.close();

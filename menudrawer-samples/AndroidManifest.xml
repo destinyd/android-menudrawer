@@ -25,6 +25,7 @@
         <activity android:name=".SimpleActivity"/>
         <activity android:name=".SimpleSherlockActivity"/>
         <activity android:name=".SimpleOffsetActivity"/>
+        <activity android:name=".SimpleOffsetPxActivity"/>
         <activity android:name=".CustomActionbarActivity"/>
     </application>
 

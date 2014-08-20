@@ -27,6 +27,7 @@ public class KCVerticalDrawerHandler {
     final private int display_height;
     private int blank_height_dp = 0;
     private boolean GTE_HONEYCOMB = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
+    private int foreground_opening_offset = 0;
 
     public KCVerticalDrawerHandler(Context context) {
         this.context = context;
@@ -43,7 +44,8 @@ public class KCVerticalDrawerHandler {
 
         blank_height_dp = DisplayModule.px_to_dp(context, actionBarHeight);
 
-        set_foreground_opening_offset(blank_height_dp);
+//        set_foreground_opening_offset(blank_height_dp);
+        set_foreground_opening_offset_px(actionBarHeight);
     }
 
     // 增加背景 View
@@ -91,7 +93,19 @@ public class KCVerticalDrawerHandler {
         else{
             foreground_opening_offset_dp = offset_dp;
         }
-        setMenuSize();
+        int height = display_height - DisplayModule.dp_to_px(context, foreground_opening_offset_dp);// - mMenuDrawer.getTouchBezelSize()
+        setMenuSize(height);
+    }
+
+    public void set_foreground_opening_offset_px(int offset_px){
+        if (GTE_HONEYCOMB) {
+            foreground_opening_offset = offset_px + statusBarHeight;
+        }
+        else{
+            foreground_opening_offset = offset_px;
+        }
+        int height = display_height - foreground_opening_offset;// - mMenuDrawer.getTouchBezelSize()
+        setMenuSize(height);
     }
 
     // 切换手势支持
@@ -102,8 +116,7 @@ public class KCVerticalDrawerHandler {
             mMenuDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_NONE);
     }
 
-    private void setMenuSize() {
-        int height = display_height - DisplayModule.dp_to_px(context, foreground_opening_offset_dp);// - mMenuDrawer.getTouchBezelSize()
+    private void setMenuSize(int height) {
         mMenuDrawer.setMenuSize(height);
     }
 

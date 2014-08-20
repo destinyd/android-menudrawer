@@ -53,4 +53,13 @@
             android:layout_alignParentLeft="true"
             android:id="@+id/button5"
             />
+    <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="set_foreground_opening_offset_px 100"
+            android:gravity="center"
+            android:layout_below="@+id/button5"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/button6"
+            />
 </RelativeLayout>
