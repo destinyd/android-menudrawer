@@ -39,6 +39,7 @@ public class KCVerticalDrawerHandler {
 
         mMenuDrawer = MenuDrawer.attach(activity, MenuDrawer.Type.BEHIND, Position.TOP, MenuDrawer.MENU_DRAG_WINDOW);
         mMenuDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_FULLSCREEN); //全屏拖动， TOUCH_MODE_BEZEL为边缘拖动
+        mMenuDrawer.setDropShadowEnabled(false);
 
         blank_height_dp = DisplayModule.px_to_dp(context, actionBarHeight);
 
