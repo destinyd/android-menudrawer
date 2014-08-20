@@ -21,7 +21,7 @@ mvn clean install
 <dependency>
     <groupId>com.github.destinyd</groupId>
     <artifactId>menudrawer</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
     <type>apklib</type>
 </dependency>
 ```

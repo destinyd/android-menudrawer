@@ -6,7 +6,7 @@
     <groupId>com.github.destinyd</groupId>
     <artifactId>menudrawer-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
 
     <name>Android MenuDrawer (Parent)</name>
     <description>纵向抽屉导航。</description>
