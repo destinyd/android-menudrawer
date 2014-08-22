@@ -67,6 +67,14 @@ public class KCVerticalDrawerHandler {
         mMenuDrawer.setContentView(view_res_id);
     }
 
+    public View get_background_view(){
+        return mMenuDrawer.getMenuView();
+    }
+
+    public View get_foreground_view(){
+        return mMenuDrawer.getContentContainer();
+    }
+
     // 打开和关闭背景View
     public void open() {
         mMenuDrawer.openMenu(true);
@@ -114,6 +122,22 @@ public class KCVerticalDrawerHandler {
             mMenuDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_FULLSCREEN);
         else
             mMenuDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_NONE);
+    }
+
+    public void set_drop_shadow_enable(boolean enable){
+        mMenuDrawer.setDropShadowEnabled(enable);
+    }
+
+    public void set_drop_shadow_enable(){
+        set_drop_shadow_enable(true);
+    }
+
+    public void set_drop_shadow_color(int color){
+        mMenuDrawer.setDropShadowColor(color);
+    }
+
+    public void set_drop_shadow_size_px(int size_px){
+        mMenuDrawer.setDropShadowSize(size_px);
     }
 
     private void setMenuSize(int height) {
