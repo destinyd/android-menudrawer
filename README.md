@@ -10,7 +10,7 @@ Android KCVerticalDrawerHandler
 ### 最新稳定版(release)
 0.1.2版（tag：v0.1.2）
 ### 最新开发版(SNAPSHOT)
-0.1.2-SNAPSHOT版（branch：master）
+0.1.3-SNAPSHOT版（branch：master）
 
 ## 如何引用此组件：
 ### 安装
