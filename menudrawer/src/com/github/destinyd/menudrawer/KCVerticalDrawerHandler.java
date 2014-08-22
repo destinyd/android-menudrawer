@@ -140,6 +140,10 @@ public class KCVerticalDrawerHandler {
         mMenuDrawer.setDropShadowSize(size_px);
     }
 
+    public boolean is_open(){
+        return mMenuDrawer.getDrawerState() != MenuDrawer.STATE_CLOSED;
+    }
+
     private void setMenuSize(int height) {
         mMenuDrawer.setMenuSize(height);
     }
