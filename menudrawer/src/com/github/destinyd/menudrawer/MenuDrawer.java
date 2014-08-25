@@ -1002,7 +1002,10 @@ public abstract class MenuDrawer extends ViewGroup {
         if (mTouchMode == TOUCH_MODE_BEZEL) {
             mTouchSize = mTouchBezelSize;
         } else if (mTouchMode == TOUCH_MODE_FULLSCREEN) {
-            mTouchSize = getMeasuredWidth();
+            if(mPosition == Position.LEFT || mPosition == Position.RIGHT)
+                mTouchSize = getMeasuredWidth();
+            else
+                mTouchSize = getMeasuredHeight();
         } else {
             mTouchSize = 0;
         }

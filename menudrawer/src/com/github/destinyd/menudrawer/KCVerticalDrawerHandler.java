@@ -39,7 +39,8 @@ public class KCVerticalDrawerHandler {
         statusBarHeightDip = DisplayModule.px_to_dp(context, statusBarHeight);
 
         mMenuDrawer = MenuDrawer.attach(activity, MenuDrawer.Type.BEHIND, Position.TOP, MenuDrawer.MENU_DRAG_WINDOW);
-        mMenuDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_FULLSCREEN); //全屏拖动， TOUCH_MODE_BEZEL为边缘拖动
+        mMenuDrawer.setTouchMode(MenuDrawer.TOUCH_MODE_BEZEL); //TOUCH_MODE_FULLSCREEN为全屏拖动
+        // TOUCH_MODE_BEZEL为边缘拖动(这个是拉多少放手就全出来)
         mMenuDrawer.setDropShadowEnabled(false);
 
         blank_height_dp = DisplayModule.px_to_dp(context, actionBarHeight);
@@ -101,6 +102,7 @@ public class KCVerticalDrawerHandler {
         else{
             foreground_opening_offset_dp = offset_dp;
         }
+        mMenuDrawer.setTouchBezelSize(foreground_opening_offset_dp);
         int height = display_height - DisplayModule.dp_to_px(context, foreground_opening_offset_dp);// - mMenuDrawer.getTouchBezelSize()
         setMenuSize(height);
     }
@@ -112,6 +114,7 @@ public class KCVerticalDrawerHandler {
         else{
             foreground_opening_offset = offset_px;
         }
+        mMenuDrawer.setTouchBezelSize(foreground_opening_offset);
         int height = display_height - foreground_opening_offset;// - mMenuDrawer.getTouchBezelSize()
         setMenuSize(height);
     }

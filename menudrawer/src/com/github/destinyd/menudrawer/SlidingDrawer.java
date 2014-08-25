@@ -5,13 +5,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 
 public class SlidingDrawer extends DraggableDrawer {
 
-    private static final String TAG = "OverlayDrawer";
 
     SlidingDrawer(Activity activity, int dragMode) {
         super(activity, dragMode);
