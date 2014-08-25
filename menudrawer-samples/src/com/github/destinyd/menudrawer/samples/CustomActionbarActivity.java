@@ -20,6 +20,6 @@ public class CustomActionbarActivity extends Activity {
         kcVerticalDrawerHandler = new KCVerticalDrawerHandler(this);
         kcVerticalDrawerHandler.add_background_view(R.layout.simple_menu);
         float actionbar_height = getResources().getDimension(R.dimen.custom_actionbar_height);
-        kcVerticalDrawerHandler.set_foreground_opening_offset((int)actionbar_height);
+        kcVerticalDrawerHandler.set_foreground_opening_offset_px((int)actionbar_height);
     }
 }

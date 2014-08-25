@@ -96,25 +96,20 @@ public class KCVerticalDrawerHandler {
 
     // 设置 open 时，前景向下滑动后保留的露出的部分高度，以dp为单位。
     public void set_foreground_opening_offset(int offset_dp) {
-        if (GTE_HONEYCOMB) {
-            foreground_opening_offset_dp = offset_dp + statusBarHeightDip;
-        }
-        else{
-            foreground_opening_offset_dp = offset_dp;
-        }
-        mMenuDrawer.setTouchBezelSize(foreground_opening_offset_dp);
-        int height = display_height - DisplayModule.dp_to_px(context, foreground_opening_offset_dp);// - mMenuDrawer.getTouchBezelSize()
-        setMenuSize(height);
+        set_foreground_opening_offset_px(DisplayModule.dp_to_px(context, offset_dp));
     }
 
     public void set_foreground_opening_offset_px(int offset_px){
+        int size_touch_bezel;
         if (GTE_HONEYCOMB) {
             foreground_opening_offset = offset_px + statusBarHeight;
+            size_touch_bezel = offset_px;
         }
         else{
             foreground_opening_offset = offset_px;
+            size_touch_bezel = offset_px + statusBarHeight;
         }
-        mMenuDrawer.setTouchBezelSize(foreground_opening_offset);
+        mMenuDrawer.setTouchBezelSize(size_touch_bezel);
         int height = display_height - foreground_opening_offset;// - mMenuDrawer.getTouchBezelSize()
         setMenuSize(height);
     }
